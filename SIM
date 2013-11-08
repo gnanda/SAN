@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+from SAN import *
+
+
+def main():
+    # Determine correct usage
+    if not ((len(sys.argv) == 4 and sys.argv[1] == 'B') or (len(sys.argv) == 5 and sys.argv[1] == 'F')):
+        print "Usage: ./SIM B s RUNS  OR  ./SIM F s RUNS network.txt"
+        exit(1)
+
+    # Parse arguments and determine the simulation to run
+    s = int(sys.argv[2])
+    runs = int(sys.argv[3])
+
+    random.seed(s)
+
+    if sys.argv[1] == 'F':
+        filename = sys.argv[4]
+        network_params = open(filename, 'r')
+    else:
+        network_params = TEST_NETWORK
+
+    run_san(runs, network_params)
+
+
+if __name__ == '__main__':
+    main()
